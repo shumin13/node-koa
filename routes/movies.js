@@ -15,26 +15,27 @@ router.get(BASE_URL, async (ctx) => {
     console.log(err)
   }
 })
-//
-// router.get(`${BASE_URL}/:id`, async (ctx) => {
-//   try {
-//     const movie = await queries.getSingleMovie(ctx.params.id)
-//     if (movie.length) {
-//       ctx.body = {
-//         status: 'success',
-//         data: movie
-//       }
-//     } else {
-//       ctx.status = 404
-//       ctx.body = {
-//         status: 'error',
-//         message: 'That movie does not exist.'
-//       }
-//     }
-//   } catch (err) {
-//     console.log(err)
-//   }
-// })
+
+router.get(`${BASE_URL}/:id`, async (ctx) => {
+  try {
+    const movies = await queries.getSingleMovie(ctx.params.id)
+    if (movies.length) {
+      ctx.body = {
+        status: 'success',
+        data: movies
+      }
+    } else {
+      ctx.status = 404
+      ctx.body = {
+        status: 'error',
+        message: 'That movie does not exist.'
+      }
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 //
 // router.post(`${BASE_URL}`, async (ctx) => {
 //   try {

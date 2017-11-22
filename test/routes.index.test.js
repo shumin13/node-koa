@@ -5,13 +5,17 @@ const should = chai.should()
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 
-const server = require('../index')
+const app = require('../index')
+var request = require('supertest').agent(app.listen())
+
+// const server = require('../index')
 
 describe('routes : index', () => {
 
   describe('GET /', () => {
     it('should return json', (done) => {
-      chai.request(server)
+      request
+      // chai.request(server)
       .get('/')
       .end((err, res) => {
         should.not.exist(err)

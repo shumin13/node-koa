@@ -4,6 +4,11 @@ function getAllMovies () {
   return knex('movies')
   .select('*')
 }
+
+function getSingleMovie(id) {
+  return knex('movies')
+  .where('id', id)
+}
 //
 // function getSingleMovie(id) {
 //   return knex('movies')
@@ -32,8 +37,8 @@ function getAllMovies () {
 // }
 //
 module.exports = {
-  getAllMovies
-  // getSingleMovie,
+  getAllMovies,
+  getSingleMovie,
   // addMovie,
   // updateMovie,
   // deleteMovie
