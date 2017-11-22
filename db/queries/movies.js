@@ -1,9 +1,9 @@
 const knex = require('../connection')
 
-// function getAllMovies() {
-//   return knex('movies')
-//   .select('*');
-// }
+function getAllMovies () {
+  return knex('movies')
+  .select('*')
+}
 //
 // function getSingleMovie(id) {
 //   return knex('movies')
@@ -31,10 +31,10 @@ const knex = require('../connection')
 //   .returning('*');
 // }
 //
-// module.exports = {
-//   getAllMovies,
-//   getSingleMovie,
-//   addMovie,
-//   updateMovie,
-//   deleteMovie
-// };
+module.exports = {
+  getAllMovies
+  // getSingleMovie,
+  // addMovie,
+  // updateMovie,
+  // deleteMovie
+}

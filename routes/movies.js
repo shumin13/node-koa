@@ -2,19 +2,19 @@ const Router = require('koa-router')
 const queries = require('../db/queries/movies')
 
 const router = new Router()
-const BASE_URL = `/api/v1/movies`
+const BASE_URL = '/movies'
 
-// router.get(BASE_URL, async (ctx) => {
-//   try {
-//     const movies = await queries.getAllMovies()
-//     ctx.body = {
-//       status: 'success',
-//       data: movies
-//     }
-//   } catch (err) {
-//     console.log(err)
-//   }
-// })
+router.get(BASE_URL, async (ctx) => {
+  try {
+    const movies = await queries.getAllMovies()
+    ctx.body = {
+      status: 'success',
+      data: movies
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
 //
 // router.get(`${BASE_URL}/:id`, async (ctx) => {
 //   try {
@@ -111,4 +111,4 @@ const BASE_URL = `/api/v1/movies`
 //   }
 // })
 
-module.exports = router;
+module.exports = router
