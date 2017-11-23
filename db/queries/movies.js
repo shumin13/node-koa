@@ -16,12 +16,12 @@ function addMovie (movie) {
   .returning('*')
 }
 //
-// function updateMovie(id, movie) {
-//   return knex('movies')
-//   .update(movie)
-//   .where({ id: parseInt(id) })
-//   .returning('*');
-// }
+function updateMovie(id, movie) {
+  return knex('movies')
+  .update(movie)
+  .where({ id: id })
+  .returning('*')
+}
 //
 // function deleteMovie(id) {
 //   return knex('movies')
@@ -34,6 +34,6 @@ module.exports = {
   getAllMovies,
   getSingleMovie,
   addMovie,
-  // updateMovie,
+  updateMovie,
   // deleteMovie
 }

@@ -92,7 +92,7 @@ describe('routes : movies', () => {
       })
     })
 
-    it('should throw an error if the payload is malformed', (done)=> {
+    it('should throw an error if the payload is malformed', (done) => {
       request
       .post('/movies')
       .send({
@@ -122,7 +122,7 @@ describe('routes : movies', () => {
         })
         .end((err, res) => {
           should.not.exist(err)
-          res.status.should.equal(201)
+          res.status.should.equal(200)
           res.type.should.equal('application/json')
           res.body.status.should.eql('success')
           res.body.data[0].should.include.keys(
@@ -134,6 +134,22 @@ describe('routes : movies', () => {
         })
       })
     })
+
+    it('should throw an error if the movie does not exist', (done) => {
+      request
+      .put('/movies/100000')
+      .send({
+        rating: 10
+      })
+      .end((err, res) => {
+        // should.exist(err)
+        res.status.should.equal(404)
+        res.type.should.equal('application/json')
+        res.body.status.should.eql('error')
+        res.body.message.should.eql('The movie does not exist.')
+        done()
+      })
+    })
   })
-  
+
 })
