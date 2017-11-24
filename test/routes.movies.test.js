@@ -152,4 +152,43 @@ describe('routes : movies', () => {
     })
   })
 
+  describe('DELETE /movies/:id', () => {
+    it('should return the movie that was deleted', (done) => {
+      knex('movies')
+      .select('*')
+      .then((movies) => {
+        const movieObject = movies[0]
+        const lengthBeforeDelete = movies.length
+        request
+        .delete(`/movies/${movieObject.id}`)
+        .end((err, res) => {
+          should.not.exist(err)
+          res.status.should.equal(200)
+          res.type.should.equal('application/json')
+          res.body.status.should.eql('success')
+          res.body.data[0].should.include.keys(
+            'id', 'name', 'genre', 'rating', 'explicit'
+          )
+          knex('movies').select('*')
+          .then((updatedMovies) => {
+            updatedMovies.length.should.eql(lengthBeforeDelete - 1)
+            done()
+          })
+        })
+      })
+    })
+
+    it('should throw an error if the movie does not exist', (done) => {
+      request
+      .delete('/movies/100000')
+      .end((err, res) => {
+        // should.exist(err)
+        res.status.should.equal(404)
+        res.type.should.equal('application/json')
+        res.body.status.should.eql('error')
+        res.body.message.should.eql('That movie does not exist.')
+        done()
+      })
+    })
+  })
 })
